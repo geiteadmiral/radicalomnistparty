@@ -1,4 +1,4 @@
-<script lang="ts">
+<!--<script lang="ts">
     import * as Threlte from '@threlte/core'
     import * as Extra from '@threlte/extras'
 
@@ -35,6 +35,6 @@
         height: 100vh;
         width: 30vw;
     }
-  </style>
+  </style> -->
 
   

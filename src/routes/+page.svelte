@@ -8,7 +8,7 @@
 
     //overganger
     //import Typewriter from 'svelte-typewriter';     //npm i -D svelte-typewriter
-    //import { concurrent } from 'svelte-typewriter'
+  //  import { concurrent } from 'svelte-typewriter'
     import { onMount } from "svelte";
     import { fly } from 'svelte/transition';
     import { fade } from "svelte/transition";
@@ -25,7 +25,9 @@
     <div class = "front">
         <div>
             {#if loadTransition}
-            <h1 in:fly="{{ y: 200, duration: 2000 }}">Are you ready to become radicalized?</h1>
+            <h1 in:slide="{{duration: 2000}}">
+                Radical Omnist Party
+            </h1> 
             <h3 in:fly="{{ y: 200, duration: 2000, delay: 1000 }}">
                 Radical Omnist Party
             </h3> 

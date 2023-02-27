@@ -25,7 +25,7 @@
     <div class = "front">
         <div>
             {#if loadTransition}
-            <Typewriter><h1>Are you ready to become radicalized?</h1></Typewriter>
+            <h1 in:fly="{{ y: 200, duration: 2000 }}">Are you ready to become radicalized?</h1>
             <h3 in:fly="{{ y: 200, duration: 2000, delay: 1000 }}">
                 Radical Omnist Party
             </h3> 

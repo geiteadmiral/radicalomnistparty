@@ -7,8 +7,8 @@
 
 
     //overganger
-    import Typewriter from 'svelte-typewriter';     //npm i -D svelte-typewriter
-    import { concurrent } from 'svelte-typewriter'
+    //import Typewriter from 'svelte-typewriter';     //npm i -D svelte-typewriter
+    //import { concurrent } from 'svelte-typewriter'
     import { onMount } from "svelte";
     import { fly } from 'svelte/transition';
     import { fade } from "svelte/transition";

@@ -1,10 +1,11 @@
+<!--Layout er felles for alle sidene-->
 <script>
 
-
+    //overganger
     import { scale } from "svelte/transition";
     import { slide } from "svelte/transition";
 
-
+   //funksjoner som styrer darkmode og light mode
     let dark = false
 
     function toggle() {
@@ -19,6 +20,8 @@
         dark = false
     }
 
+
+    //til å åpne og lukke contact-modalen + et varsel som kommer opp når man trykker på submit
     let showContact = false
 
     function openContact(){
@@ -33,6 +36,7 @@
         alert("Question submitted.")
     }
 
+    //åpner og lukker menyen
     let menu = false
 
     function showMenu() {
@@ -50,9 +54,11 @@
 
 
 <body>
+    <!--Navbaren-->
     <nav class = "navbar">
             <a href="/"><img src="logo.png" alt=""></a>
         <div>
+            <!--Forskjellig knapp avhenig av om dark mode er på eller av-->
             {#if !dark}
             <button on:click={toggle} on:click={lightMode }>
                 <div class="lightmode">
@@ -69,15 +75,8 @@
             </button>
             {/if}
         </div>
-      <!-- 
-        <div>
-            <button>
-                <a href="/">
-                    <i class="fa-solid fa-house"></i>
-                    <p>Home</p>
-                </a>
-            </button> 
-        </div> -->
+
+        <!--forskjellige ting vises avhenging av om menu true eller false-->
         {#if !menu}
         <div>
             <button on:click={showMenu}> 
@@ -93,6 +92,7 @@
                     <p>Menu</p>
                 </button>
             </div>
+            <!--Link til forskjellige steder på nettsiden-->
             <div in:slide={{duration: 100}} class = "menu">
                 <a href="/"><p>Home</p></a>
                 <a href="/#aboutus"><p>About Us</p></a>
@@ -102,6 +102,8 @@
             </div>
         </div>
         {/if}
+
+        <!--Knapp hvor man kan åpne modalen-->
         <button on:click={openContact}>
             <div class="contact">
                 <div>
@@ -115,7 +117,7 @@
     </nav>
 </body>
 
-
+<!--Modalen, vises bare om showContact er true-->
 {#if showContact}
 <div class ="popup box" transition:scale={{duration: 300}}>
     <div>
@@ -125,28 +127,43 @@
             <p>If you have any questions about ROMP, write them below to contact Radical Omnist Party Europe (ROMPE).
                 We will make sure to not respond in 3-5 business days!
             </p>
+            <!--Input form hvor man kan skrive-->
             <form>
                 <label for="email">Email address:</label><br>
                 <input type="email" id = "email" name="email" placeholder="Enter an email address..." > <br>
                 <label for="question">Question:</label><br>
                 <textarea name = "question" id="question" placeholder="Enter your question..."></textarea>
             </form>
+            <!--ikke en faktisk submit knapp som del av inputet fordi jeg har ingen backend-->
             <button class ="submit" on:click={submit}>Submit</button>
         </div>
     </div>
 </div>
 {/if}
-
+ 
+<!--slot slik at man kan putte innholdet fra de andre sidene her-->
 <slot></slot>
 
 <style>
 
+/*Styler hele bodyen*/
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
     zoom: 100%
 }
 
+/*Mørk og lyd modus*/
+:global(body) {
+		background-color: #e7e6e6;
+		transition: background-color 0.3s
+	}
+:global(body.dark-mode) {
+    background-color: rgb(59, 57, 57);
+    color: white;
+}
+
+/*Størrelsen til de forskjellige overskriftene*/
 :global(h1) {
     font-size: 7vh;
 }
@@ -162,21 +179,7 @@ body {
 
 
 
-
-/*Mørk og lyd modus*/
-:global(body) {
-		background-color: #e7e6e6;
-		transition: background-color 0.3s
-	}
-:global(body.dark-mode) {
-    background-color: rgb(59, 57, 57);
-    color: white;
-}
-
-
-
-
-
+/*Navbaren på mørk og lys modus*/
 :global(nav){
     background-color: #fafafa;
 }
@@ -186,6 +189,7 @@ body {
     color: white;
 }
 
+/*Fargen til knappen for fargetemaet, avhenig av mørk eller lys modus*/
 .darkmode i{
     color: rgb(255, 222, 6);
 
@@ -195,11 +199,6 @@ body {
     color: rgb(76, 43, 160);
 }
 
-
-:global(.dark-mode nav){
-    background-color: rgb(24, 24, 24)
-
-}
 
 
 
@@ -216,6 +215,7 @@ nav{
 
 }
 
+/*Spesifikt alle divene som er direkte inne i en nav*/
 nav > div {
     border-bottom: 1px solid rgb(106, 106, 106);
 }
@@ -227,6 +227,7 @@ nav button {
     text-align: center;
 }
 
+/*Ikonene der*/
 nav i {
     color: rgb(98, 157, 141);
     background: none;
@@ -240,21 +241,9 @@ nav p {
     color: rgb(106, 106, 106);
 }
 
+/*Om man klikker over linkene eller knappene*/
 a:hover{
     opacity: 0.6;
-}
-
-nav img {
-    border: none;
-    margin-bottom: 5vh;
-    width: 7vw;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-a {
-    text-decoration: none;
-    color: black;
 }
 
 :global(button:hover){
@@ -262,6 +251,14 @@ a {
     cursor: pointer;
 }
 
+
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+/*Kontakt tingen*/
 .contact {
     position: fixed;
     bottom: 20px;
@@ -273,6 +270,8 @@ a {
     font-size: 2vh;
 }
 
+
+/*Modalen*/
 .popup {
     z-index: 1;
     position: fixed;
@@ -285,6 +284,9 @@ a {
 
 }
 
+
+
+/*Lukkeknappen til modalen*/
 .close {
     position: fixed;
     margin-left: 33vw;
@@ -302,6 +304,7 @@ a {
     border: none;
 }
 
+/*Form*/
 #email {
     width: 15vw;
     margin-bottom: 2vh
@@ -325,6 +328,16 @@ textarea{
     color: rgb(98, 157, 141);
 }
 
+/*Bildet*/
+nav img {
+    border: none;
+    margin-bottom: 5vh;
+    width: 7vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/*Alle bildene på nettsiden*/
 :global(img){
     border-radius: 10px;
 }

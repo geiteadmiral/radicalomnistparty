@@ -1,4 +1,5 @@
 <script>
+    //andre svelte filer
     import Gibby from "./gibby.svelte";
     import Aboutus from "./aboutus.svelte";
     import Images from "./images.svelte";
@@ -14,7 +15,7 @@
     import { fade } from "svelte/transition";
     import { slide } from "svelte/transition";
 
-
+    //funksjon som starter hver gang siden lastes inn
     let loadTransition = false
     onMount(() => loadTransition = true);
 
@@ -23,7 +24,7 @@
 
 <div class = "mainpage" id ="home">
     <div class = "front">
-        <div>
+        <div> <!--forskjellige overganger, kommer opp når siden lastes inn-->
             {#if loadTransition}
             <h1 in:slide="{{duration: 2000}}">
                 Radical Omnist Party
@@ -40,10 +41,12 @@
         </div>
         {#if loadTransition}
         <div in:fade="{{duration: 2000, delay: 2000 }}">
+            <!--Denne er tom nå, men i teorien linkes siden "gibby" til-->
             <Gibby></Gibby>
         </div>
         {/if}
     </div>
+    <!--linker til de forskjellige sidene-->
     <div id = "aboutus">
         <Aboutus></Aboutus>
     </div>
@@ -56,11 +59,11 @@
     <div id = "faq">
         <Faq></Faq>
     </div>
-    <div class = "footer">
-        <footer>
-            ⓒRadical Omnist Party 2023
-        </footer>
-    </div>
+
+    <footer>
+        ⓒRadical Omnist Party 2023
+    </footer>
+
 
 
 </div>
@@ -68,12 +71,13 @@
 
 <style>
 
-
+/*Legger til en margin på hele innholdet fordi navbaren er der*/
 .mainpage {
     margin-left:11vw;
-    position: relative;
 }
 
+
+/*Styler forsiden (det som kommer opp først)*/
 .front {
     padding-left: 7vw;
     padding-right: 5vw;
@@ -102,17 +106,13 @@
     text-decoration: none;
 }
 
-.footer {
-    position: relative;
-}
+/*Footer*/
+
 footer{
     width: 89vw;
     height: 5vh;
     margin-top: 10vh;
     background-color: rgb(98, 157, 141);
-    position: sticky;
-    bottom: 0;
-    overflow: hidden;
     color: black;
     text-align: center;
     padding-top: 2vh;
